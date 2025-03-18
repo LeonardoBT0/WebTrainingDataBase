@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="59df03d4a7ea4d2cacdaf893aa1859dd" Name="Diagram1" ZoomLevel="46">
+        <EntityTypeShape EntityType="TestDbMensajeriaModel.Direcciones" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbMensajeriaModel.Login" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbMensajeriaModel.Personas" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbMensajeriaModel.Profesiones" Width="1.5" PointX="2.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbMensajeriaModel.ProfesionesPersonas" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbMensajeriaModel.Telefonos" Width="1.5" PointX="0.5" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="TestDbMensajeriaModel.FK_Personas_Direcciones" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbMensajeriaModel.FK_Personas_Telefonos" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbMensajeriaModel.FK_ProfesionesPersonas_Personas" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbMensajeriaModel.FK_ProfesionesPersonas_Profesiones" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TestDbMensajeriaModel.Roles" Width="1.5" PointX="7.375" PointY="7.25" />
+        <EntityTypeShape EntityType="TestDbMensajeriaModel.UsuarioRol" Width="1.5" PointX="9.625" PointY="0.875" />
+        <EntityTypeShape EntityType="TestDbMensajeriaModel.Usuarios" Width="1.5" PointX="7.375" PointY="1" />
+        <AssociationConnector Association="TestDbMensajeriaModel.FK_UsuarioRol_Roles" />
+        <AssociationConnector Association="TestDbMensajeriaModel.FK_UsuarioRol_Usuarios" />
+        <EntityTypeShape EntityType="TestDbMensajeriaModel.Biografia" Width="1.5" PointX="5.25" PointY="9.625" />
+        <EntityTypeShape EntityType="TestDbMensajeriaModel.Certificaciones" Width="1.5" PointX="5.25" PointY="12.375" />
+        <EntityTypeShape EntityType="TestDbMensajeriaModel.Skills" Width="1.5" PointX="5.25" PointY="15.125" />
+        <AssociationConnector Association="TestDbMensajeriaModel.FK_Biografia_Personas" />
+        <AssociationConnector Association="TestDbMensajeriaModel.FK_Certificaciones_Personas" />
+        <AssociationConnector Association="TestDbMensajeriaModel.FK_Skills_Personas" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

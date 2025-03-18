@@ -1,0 +1,137 @@
+﻿@model WebTrainingDataBase.ViewModels.PersonaVM
+@{
+    ViewBag.Title = "Perfil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row card d-flex flex-row shadow p-3 mb-1 bg-body rounded">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 justify-content-start">
+            <label class="roboto-ExtraBold-800 title-size-max">
+                @ViewBag.NombreCompleto
+            </label>
+            <p class="mt-0 mb-0">Telefono: @Model.TelefonoVM.NumeroCelular</p>
+            <p class="mt-0">Direccion: @Model.DireccionVM.Calle
+                Numero Interior: @Model.DireccionVM.NumInterior
+                Numero Exterior: @Model.DireccionVM.NumExterior
+            </p>
+            <hr />
+            <button class="btn btn-bd-morado" id="btSkill" data-bs-toggle="modal" data-bs-target="#modalSkill">
+                <i class="fa-solid fa-thumbs-up"></i>
+                Agregar Skill
+            </button>
+            <button type="button" class="btn btn-outline-success" id="btnBio">
+                <i class="fa-solid fa-house"></i>
+                Bio
+            </button>
+            <button type="button" class="btn btn-outline-secondary">
+                <i class="fa-solid fa-gear"></i>
+                Configuraciones
+            </button>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 justify-content-end">
+            <img src="~/Immagenes/usuario_anonimo_formal.jpg"
+                 alt="Descripcion de la imagen" class="img-fluid img-thumbnail" />
+            <select class="form-select form-select-sm border border-success roboto-thin-ExtraLight-200 mt-1"
+                    aria-label=".form-select-sm example">
+                <option selected>Asignar Roles</option>
+                <option value="1">Administrador</option>
+                <option value="2">Invitado</option>
+                <option value="3">Analista</option>
+            </select>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-2 d-flex">
+            <div class="mb-3 justify-content-sm-start">
+                <label for="formFileSm" class="form-label">
+                    <i class="fa-solid fa-camera"></i>
+                    Agregar Foto
+                </label>
+                <input class="form-control form-control-sm" id="formFileSm" type="file" />
+            </div>
+        </div>
+     </div>
+    <div class="row pt-0 mt-0" id="cardRow">
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 card d-flex flex-row shadow p-3 mq-5 bg-body rounded" id="cardSkill">
+            <div class="card-body" id="skillBody">
+                <div class="card-title">
+                    <span class="roboto-Black-900 title-morado">
+                        Skill Profesionales
+                    </span>
+                </div>
+                <hr />
+                <span id="spanId"></span>
+            </div>
+        </div> 
+        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 card d-flex flex-row shadow p-3 mg-5 bg-body rounded" id="carBio">
+            <div class="card-body">
+                <div class="card-title">
+                    <span class="roboto-Black-900 title-morado">
+                        Biografia
+                    </span>
+                    <hr />
+                </div>
+                <textarea class="form-control" id="tctAreaBio" rows="5" placeholder="Escribe tu comentario aqui..."></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row pt-0 mt-1" id="cardCertificacionesRow">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 card d-flex flex-row shadow p-3 mg-5 bg-body rounded" id="cardCertificaciones">
+            <div class="card-body">
+                <div class="card-title">
+                    <span class="roboto-Black-900 title-morado">
+                        Certificaciones
+                    </span>
+                    <hr />
+                </div>
+                <form class="d-flex justify-content-between">
+                    <label for="exampleInputEmail" class="form-label">
+                        Certifiaciones
+                    </label>
+                    <input type="text" class="form-control form-control-sm" id="exampleInputEmail" aria-describedby="emailHelp" />
+                    <label for="exampleInputPassword" class="form-label">Institucion:</label>
+                    <input type="text" class="form-control" id="exampleInputPassword" />
+                    <div class="mb-0 form-check-input">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+                        <label class="form-check-label" for="exampleCheck1">
+                            Terminado
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-outline-success w-25">
+                        Agregar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="modal fade" id="modaSkill" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header header-modal">
+                        <h1 class="modal-title fs-5 roboto-thin-ExtraLight-200 header-color-text" id="exampleModalLabel">Agregar Skill Tecnico</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 d-flex">
+                                <p class="justify-content-start p-1">
+                                    <span class="roboto-thin-100">
+                                           <i class="fa-solid fa-headphones"></i>
+                                        Skill
+                                    </span>
+                                </p>
+                                <input type="text" id="txtSkill" class="form-control form-control-sm roboto-thin-ExtraLight-200" placeholder="Nombre del Skill" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-outline-success" id="btnGuardarSkill">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/perfil/create-skill.js"></script>

@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("Styles", required: false) <!-- Permite agregar estilos personalizados en vistas -->
+
+    <style>
+        /* Estilos para el sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px; /* Oculto por defecto */
+            width: 250px;
+            height: 100%;
+            background-color: #343a40;
+            padding-top: 20px;
+            transition: left 0.3s ease-in-out; /* Animación suave */
+            z-index: 1050; /* Mayor que el contenido */
+            color: white;
+            box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+            .sidebar a {
+                padding: 10px 15px;
+                text-decoration: none;
+                font-size: 18px;
+                color: white;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidebar a:hover {
+                    background-color: #495057;
+                }
+
+            .sidebar .close-btn {
+                position: absolute;
+                top: 10px;
+                right: 20px;
+                font-size: 25px;
+                cursor: pointer;
+            }
+
+        /* Ajuste del contenido principal: Siempre centrado */
+        .content {
+            transition: all 0.3s ease-in-out;
+            max-width: 900px; /* Limitar el ancho */
+            margin: auto; /* Centrar */
+            padding: 20px;
+        }
+
+        /* Oscurecer el fondo cuando el sidebar está abierto */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none; /* Oculto por defecto */
+            z-index: 1040; /* Debajo del sidebar */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container">
+            <button id="sidebarToggle" class="btn btn-dark">
+                ☰
+            </button>
+            @Html.ActionLink("Inicio", "Creates", "Personas", new { area = "" }, new { @class = "navbar-brand ms-2" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li>@Html.ActionLink("Profesiones", "Create", "Profesiones", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Tabla profesiones", "Index", "Profesiones", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Contacto", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Overlay -->
+    <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar (Oculto por defecto) -->
+    <div id="mySidebar" class="sidebar">
+        <span class="close-btn" onclick="toggleSidebar()">&times;</span>
+        <a href="#">Dashboard</a>
+        <a href="#">Usuarios</a>
+        <a href="#">Reportes</a>
+        <a href="#">Configuración</a>
+    </div>
+
+    <!-- Contenedor principal -->
+    <div class="container mt-3 content" id="mainContent">
+        @RenderBody()
+
+        <!-- Footer -->
+        <hr />
+        <footer class="text-center">
+            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script>
+        let isSidebarOpen = false; // Estado del sidebar
+
+        function toggleSidebar() {
+            var sidebar = document.getElementById("mySidebar");
+            var overlay = document.getElementById("overlay");
+
+            if (!isSidebarOpen) {
+                sidebar.style.left = "0";
+                overlay.style.display = "block"; // Mostrar fondo oscuro
+            } else {
+                sidebar.style.left = "-250px";
+                overlay.style.display = "none"; // Ocultar fondo oscuro
+            }
+
+            isSidebarOpen = !isSidebarOpen; // Invertir el estado
+        }
+
+        document.getElementById("sidebarToggle").addEventListener("click", toggleSidebar);
+    </script>
+</body>
+</html>

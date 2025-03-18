@@ -1,0 +1,163 @@
+﻿@model WebTrainingDataBase.ViewModels.PersonaVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg p-4 rounded">
+                <h3 class="text-center mb-4 text-primary monomakh-regular">Registro de Persona</h3>
+                @using (Html.BeginForm("", "Personas", FormMethod.Post, new { @class = "needs-validation", novalidate = "true" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="form-floating">
+                                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control monomakh-regular", placeholder = "Nombre" } })
+                                @Html.LabelFor(model => model.Nombre)
+                                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="form-floating">
+                                @Html.EditorFor(model => model.ApellidoPaterno, new { htmlAttributes = new { @class = "form-control", placeholder = "Apellido Paterno" } })
+                                @Html.LabelFor(model => model.ApellidoPaterno)
+                                @Html.ValidationMessageFor(model => model.ApellidoPaterno, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="form-floating">
+                                @Html.EditorFor(model => model.ApellidoMaterno, new { htmlAttributes = new { @class = "form-control", placeholder = "Apellido Materno" } })
+                                @Html.LabelFor(model => model.ApellidoMaterno)
+                                @Html.ValidationMessageFor(model => model.ApellidoMaterno, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="form-floating">
+                                @Html.EditorFor(model => model.Edad, new { htmlAttributes = new { @class = "form-control", placeholder = "Edad", type = "number" } })
+                                @Html.LabelFor(model => model.Edad)
+                                @Html.ValidationMessageFor(model => model.Edad, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="mt-3 text-secondary monomakh-regular">Profesiones</h5>
+                    <div class="row">
+                        @Html.DropDownList("Profesiones", null, new { @class = "form-control input-sm", id = "Profesiones" })
+                    </div>
+                    <h5 class="mt-3 text-secondary">Teléfonos</h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="form-floating">
+                                @Html.EditorFor(model => model.TelefonoVM.NumeroCelular, new { htmlAttributes = new { @class = "form-control", placeholder = "Celular", type = "tel" } })
+                                @Html.LabelFor(model => model.TelefonoVM.NumeroCelular)
+                                @Html.ValidationMessageFor(model => model.TelefonoVM.NumeroCelular, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="form-floating">
+                                @Html.EditorFor(model => model.TelefonoVM.NumeroCasa, new { htmlAttributes = new { @class = "form-control", placeholder = "Teléfono de Casa", type = "tel" } })
+                                @Html.LabelFor(model => model.TelefonoVM.NumeroCasa)
+                                @Html.ValidationMessageFor(model => model.TelefonoVM.NumeroCasa, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="mt-3 text-secondary monomakh-regular">Dirección</h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="form-floating">
+                                @Html.EditorFor(model => model.DireccionVM.Calle, new { htmlAttributes = new { @class = "form-control", placeholder = "Calle" } })
+                                @Html.LabelFor(model => model.DireccionVM.Calle)
+                                @Html.ValidationMessageFor(model => model.DireccionVM.Calle, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-floating">
+                                @Html.EditorFor(model => model.DireccionVM.NumInterior, new { htmlAttributes = new { @class = "form-control", placeholder = "N° Interior" } })
+                                @Html.LabelFor(model => model.DireccionVM.NumInterior)
+                                @Html.ValidationMessageFor(model => model.DireccionVM.NumInterior, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="form-floating">
+                                @Html.EditorFor(model => model.DireccionVM.NumExterior, new { htmlAttributes = new { @class = "form-control", placeholder = "N° Exterior" } })
+                                @Html.LabelFor(model => model.DireccionVM.NumExterior)
+                                @Html.ValidationMessageFor(model => model.DireccionVM.NumExterior, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div id="tablaProfesionesContainer" class="col-md-12" style="display: none;">
+                                <h4>Profesiones Seleccionados</h4>
+                                <table class="table table-bordered" id="tablaProfesiones">
+                                    <thead>
+                                        <tr>
+                                            <th>Profesiones</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="bi bi-check-circle"></i> Registrar
+                            </button>
+                        </div>
+                        }
+                    </div>
+                    <div class="text-center mt-3">
+                        @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-outline-secondary btn-lg" })
+                    </div>
+                </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(fuction(){
+        $('#Profesiones').change(fuction(){
+            let selectedText = $("#Profesiones option:selected").text();
+            let selectedValue = $("#Profesiones").val();
+
+            if(selectedValue) {
+                if ($(`#tablaProfesiones tbody tr[data-id='${selectedValue}']`).lenght === 0) {
+                    let row = `<tr data-id="${selectedValue}"><td>${selectedText}</td>
+                                <td><button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(${selectedValue})">Eliminar</button></td></tr>`;
+                    $('#tablaProfesiones tbody').append(row);
+                    $('#tablaProfesionesContainer').show();
+                }
+            }
+        });
+    });
+
+    function eliminarFila(){
+        $(`#tablaProfesiones tbody tr[data-id='${id}']`).remove();
+        if ($('#tablaProfesiones tbody tr').lenght === 0) {
+            $('#tablaProfesionesContainer').hide();
+        }
+    }
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@section Styles {
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Monomakh&display=swap" rel="stylesheet">
+    <style>
+        .monomakh-regular {
+            font-family: "Monomakh", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+    </style>
+}
